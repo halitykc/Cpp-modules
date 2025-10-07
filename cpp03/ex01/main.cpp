@@ -1,21 +1,32 @@
 
 
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 
-int main()
+int main(void)
 {
-    ClapTrap a = ClapTrap("Mahmut");
-	ClapTrap b = ClapTrap("Ismet");
+    std::cout << "\n" << "=== ClapTrap ===" << "\n\n";
+    ClapTrap clap("Clappy");
 
-	a.attack("Ismet");
-	b.takeDamage(20);
-	b.beRepaired(20);
-	b.attack("Mahmut");
-	a.takeDamage(100);
-	a.takeDamage(100);
-	b.takeDamage(50);
+    clap.attack("Target1");
+    clap.takeDamage(5);
+    clap.beRepaired(3);
 
-    return 0;
+    std::cout << "\n";
+
+    clap.attack("Target2");
+    clap.takeDamage(6);
+    clap.beRepaired(2);
+
+    std::cout << "\n" << "=== ScavTrap ==="  << "\n\n";
+    ScavTrap scav("Scavy");
+
+    scav.attack("Enemy1");
+    scav.takeDamage(20);
+    scav.beRepaired(10);
+    scav.guardGate();
+
+    std::cout << "\n"  << "=== Destructor Çağrıları ===" << "\n\n";
+    return (0);
 }
-
