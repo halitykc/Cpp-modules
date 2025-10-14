@@ -6,10 +6,10 @@
 Dog::Dog( void ) {
 
     std::cout << "Dog Constructor called" << std::endl;
-
+    this->_type = "Dog";
 }
 
-Dog::Dog( const Dog& copy ) {
+Dog::Dog( const Dog& copy ) : Animal(copy) {
 
     *this = copy;
 
@@ -30,7 +30,7 @@ Dog::~Dog() {
 
 }
 
-void    Dog::makeSound( void ) {
+void    Dog::makeSound( void ) const {
 
     std::cout << "Dog haw haw!" << std::endl;
     

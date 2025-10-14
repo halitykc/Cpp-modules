@@ -10,11 +10,11 @@
 class Cat : public Animal {
 
     public:
-        Cat();
+        Cat( void );
         Cat( const Cat& copy );
         Cat& operator=( const Cat& other);
         ~Cat();
-        void    makeSound();
+        void    makeSound() const;
         
 };
 
