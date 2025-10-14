@@ -11,5 +11,7 @@ int main()
     hayvan.makeSound();
     kedi.makeSound();
     
+    std::cout << kedi.getType() << std::endl;
+
     return 0;
 }

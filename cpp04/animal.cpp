@@ -35,3 +35,9 @@ void    Animal::makeSound( void ) {
     std::cout << "Animal Sound!" << std::endl;
     
 }
+
+std::string Animal::getType( void ) {
+
+    return (this->_type);
+    
+}

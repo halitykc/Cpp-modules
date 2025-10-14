@@ -6,6 +6,7 @@
 Cat::Cat( void ) {
 
     std::cout << "Cat Constructor called" << std::endl;
+    this->_type = "Kedi";
 
 }
 
