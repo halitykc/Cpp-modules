@@ -1,25 +1,42 @@
 
 
+// #include "Animal.hpp"
+// #include "Dog.hpp"
+// #include "Cat.hpp"
+
+// int main() {
+
+//     const   Animal* meta = new Animal();
+//     const   Animal* j = new Dog();
+//     const   Animal* i = new Cat();
+
+//     std::cout << i->getType() << std::endl;
+//     std::cout << j->getType() << std::endl;
+
+//     i->makeSound();
+//     j->makeSound();
+//     meta->makeSound();
+
+
+//     delete meta;
+//     delete  i;
+//     delete  j;
+// }
+
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
-//#include "Dog.hpp"
 
-int main()
-{
-    const WrongAnimal * hayvan = new WrongAnimal();
-    const WrongAnimal * kedi = new WrongCat();
-    //const Animal * kopek = new Dog();
+int main() {
 
-    std::cout << kedi->getType() << " " << std::endl;
-    //std::cout << kopek->getType() << " " << std::endl;
+    const   WrongAnimal* meta = new WrongAnimal();
+    const   WrongAnimal* i = new WrongCat();
 
-    hayvan->makeSound();
-    kedi->makeSound();
-    //kopek->makeSound();
+    std::cout << i->getType() << std::endl;
 
-    delete hayvan;
-    delete kedi;
-    //delete kopek;
+    i->makeSound();
+    meta->makeSound();
 
-    return 0;
+
+    delete meta;
+    delete  i;
 }

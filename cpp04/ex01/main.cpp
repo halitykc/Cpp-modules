@@ -1,27 +1,35 @@
 
-
 #include "Animal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
 
-int	main(void)
-{
+int main() {
+    int arraySize = 4;
+    Animal* animals[arraySize];
 
-    Brain *brain  = new Brain();
-    
+    for (int i = 0; i < arraySize; i++) {
+        if (i < arraySize / 2)
+            animals[i] = new Dog();
+        else
+            animals[i] = new Cat();
+    }
 
-    brain->set_idea(0, "I want to play");
-    brain->set_idea(1, "I want to eat");
-    brain->get_idea(0);
-    brain->get_idea(1);
+    Dog originalDog;
     
-    Brain *brain2 = brain;
+    originalDog.get_brain().set_idea(0,"Original Dog Idea");
 
-    brain->set_idea(1, "I want to sleep");
-    brain->get_idea(1);
-    brain2->get_idea(1);
-    
-    delete brain;
-	return (0);
+
+    Dog copyDog = originalDog; 
+    originalDog.get_brain().set_idea(0,"Copied Dog Idea");
+
+    std::cout << "================= Deep Copy Test =================" << std::endl;
+    copyDog.get_brain().get_idea(0);
+    originalDog.get_brain().get_idea(0);
+    std::cout << "==================================================" << std::endl;
+
+    for (int i = 0; i < arraySize; i++) {
+        delete animals[i];
+    }
+
+    return 0;
 }
-    

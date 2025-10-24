@@ -1,5 +1,6 @@
 
 
+
 #ifndef WRONGANIMAL_HPP
 #define WRONGANIMAL_HPP
 
@@ -8,16 +9,16 @@
 class WrongAnimal {
 
     protected:
-        std::string type;
+        std::string     type;
     public:
-        WrongAnimal( void );
-        WrongAnimal( const WrongAnimal& copy);
-        WrongAnimal& operator=( const WrongAnimal& other);
-        ~WrongAnimal( void );
+        WrongAnimal();
+        WrongAnimal( const WrongAnimal& copy );
+        WrongAnimal&    operator= ( const WrongAnimal& other );
+        ~WrongAnimal();
 
-        void makeSound( void ) const;
-        std::string getType( void ) const;
+        void    makeSound() const;
+        std::string getType() const;
+
 };
-
 
 #endif

@@ -6,18 +6,19 @@
 
 #include <iostream>
 
-class Animal {
-
+class Animal
+{
     protected:
-        std::string type;
+        std::string     type;
     public:
-        Animal( void );
-        Animal( const Animal& copy);
-        Animal& operator=( const Animal& other);
-        virtual ~Animal( void );
+        Animal(void);
+        Animal( const Animal& copy );
+        Animal& operator=( const Animal& other );
+        virtual ~Animal();
 
-        virtual void makeSound( void ) const;
-        virtual std::string getType( void ) const;
+        virtual void    makeSound( void ) const;
+        std::string getType( void ) const;
 };
+
 
 #endif
