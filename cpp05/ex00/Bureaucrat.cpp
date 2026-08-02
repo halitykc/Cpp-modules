@@ -49,3 +49,31 @@ Bureaucrat::~Bureaucrat() {
 
 }
 
+
+std::string Bureaucrat::getName() const {
+
+    return _name;
+}
+
+int         Bureaucrat::getGrade() const {
+
+    return _grade;
+}
+
+void        Bureaucrat::increGrade() {
+
+    if (_grade == 0)
+        throw Bureaucrat::GradeTooHigh();
+    _grade--;
+}
+
+void        Bureaucrat::decreGrade() {
+
+    if (_grade == 150)
+    {
+        throw Bureaucrat::GradeTooLow();
+    }
+    
+    _grade++;
+}
+
