@@ -43,6 +43,6 @@ class Bureaucrat {
         
 };
 
-std::ostream& operator<<(std::ostream &o, Bureaucrat& buro);
+std::ostream& operator<<(std::ostream &o, const Bureaucrat& buro);
 
 #endif
