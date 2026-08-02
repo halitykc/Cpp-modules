@@ -62,7 +62,7 @@ int         Bureaucrat::getGrade() const {
 
 void        Bureaucrat::increGrade() {
 
-    if (_grade == 0)
+    if (_grade == 1)
         throw Bureaucrat::GradeTooHigh();
     _grade--;
 }
