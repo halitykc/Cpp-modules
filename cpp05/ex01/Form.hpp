@@ -38,7 +38,7 @@ public:
         public:
             virtual const char* what() const throw();
     };
-    class GradeTooLowExeption: public std::exception {
+    class GradeTooLowException: public std::exception {
 
         public:
             virtual const char* what() const throw();
