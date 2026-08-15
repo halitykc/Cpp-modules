@@ -7,6 +7,8 @@
 #include <string>
 #include <exception>
 
+class Form;
+
 class Bureaucrat {
 
 
@@ -41,6 +43,7 @@ class Bureaucrat {
         };
     
         
+        void    signForm( Form& form);
 };
 
 std::ostream& operator<<(std::ostream &o, const Bureaucrat& buro);

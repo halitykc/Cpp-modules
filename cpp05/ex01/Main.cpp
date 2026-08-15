@@ -1,71 +1,53 @@
-#include <iostream>
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 int main() {
-    std::cout << "--- TEST 1: Sorunsuz Calisan Burokrat (Happy Path) ---" << std::endl;
+    std::cout << "--- 42 MODULE 05 - EX01 TESTLERI ---\n" << std::endl;
+
     try {
-        Bureaucrat ahmet("Ahmet", 42);
-        std::cout << ahmet << std::endl; // Operator<< testimiz
-
-        std::cout << "Ahmet terfi aliyor..." << std::endl;
-        ahmet.increGrade(); // 42 -> 41 olmali
-        std::cout << ahmet << std::endl;
-
-        std::cout << "Ahmet ceza aliyor..." << std::endl;
-        ahmet.decreGrade(); // 41 -> 42 olmali
-        std::cout << ahmet << std::endl;
-    }
-    catch (std::exception &e) {
-        std::cerr << "Hata: " << e.what() << std::endl;
-    }
-    std::cout << "\n";
-
-
-    std::cout << "--- TEST 2: Yaratilis (Constructor) Sirasinda Hata ---" << std::endl;
-    try {
-        std::cout << "Derecesi 0 olan bir Patron yaratilmaya calisiliyor..." << std::endl;
-        Bureaucrat patron("Patron", 0); // Burada bomba patlamali!
+        // 1. Bürokratımızı ve Formlarımızı Yaratalım
+        Bureaucrat patron("Ahmet", 42);
         
-        // Eger ustteki satir patlarsa, alt satir ASLA okunmaz.
-        std::cout << patron << std::endl; 
-    }
-    catch (std::exception &e) {
-        // Bomba buraya duser ve program cokmekten kurtulur.
-        std::cerr << "Yakalandi! -> " << e.what() << std::endl;
-    }
-    std::cout << "\n";
-
-
-    std::cout << "--- TEST 3: Terfi Sınırını (increGrade) Asma Hatasi ---" << std::endl;
-    try {
-        std::cout << "Derecesi 1 olan bir Kral yaratiliyor..." << std::endl;
-        Bureaucrat kral("Kral", 1);
-        std::cout << kral << std::endl;
-
-        std::cout << "Kral terfi ettirilmeye calisiliyor..." << std::endl;
-        kral.increGrade(); // Zaten 1, burada bomba patlamali!
+        // Ahmet (42) bu formu imzalayabilir çünkü form 50 istiyor (Ahmet'in rütbesi daha yüksek/sayıca küçük)
+        Form izinDilekcesi("Izin Dilekcesi", 50, 50);
         
-        std::cout << "Bu yazi asla ekranda gorunmeyecek." << std::endl;
-    }
-    catch (std::exception &e) {
-        std::cerr << "Yakalandi! -> " << e.what() << std::endl;
-    }
-    std::cout << "\n";
+        // Ahmet (42) bu formu İMZALAYAMAZ çünkü form 10 istiyor (Sadece en yüksek 10 rütbe)
+        Form cokGizliBelge("Cok Gizli Belge", 10, 10);
 
+        std::cout << "--- BASLANGIC DURUMLARI ---" << std::endl;
+        std::cout << patron; // Bureaucrat operator<< testi
+        std::cout << "\n";
+        std::cout << izinDilekcesi; // Form operator<< testi
+        std::cout << cokGizliBelge;
 
-    std::cout << "--- TEST 4: Dusurulme Sınırını (decreGrade) Asma Hatasi ---" << std::endl;
+        std::cout << "\n--- TEST 1: BASARILI IMZA ---" << std::endl;
+        patron.signForm(izinDilekcesi);
+        std::cout << izinDilekcesi; // Imza durumunun Yes (1) oldugunu gormeliyiz
+
+        std::cout << "\n--- TEST 2: BASARISIZ IMZA (GradeTooLow) ---" << std::endl;
+        patron.signForm(cokGizliBelge);
+        std::cout << cokGizliBelge; // Imza durumunun No (0) kaldigini gormeliyiz
+
+    } catch (std::exception &e) {
+        std::cerr << "Genel Hata: " << e.what() << std::endl;
+    }
+
+    std::cout << "\n--- TEST 3: HATALI FORM YARATMA (GradeTooHigh) ---" << std::endl;
     try {
-        std::cout << "Derecesi 150 olan bir Stajyer yaratiliyor..." << std::endl;
-        Bureaucrat stajyer("Stajyer", 150);
-        std::cout << stajyer << std::endl;
-
-        std::cout << "Stajyerin rütbesi dusurulmeye calisiliyor..." << std::endl;
-        stajyer.decreGrade(); // Zaten 150, burada bomba patlamali!
+        // Form imzalamak icin 0 rütbe (gecersiz) istiyor!
+        Form hataliForm("Bozuk Form", 0, 50); 
+    } catch (std::exception &e) {
+        std::cerr << "Hata yakalandi: " << e.what() << std::endl;
     }
-    catch (std::exception &e) {
-        std::cerr << "Yakalandi! -> " << e.what() << std::endl;
-    }
-    std::cout << "\n";
 
+    std::cout << "\n--- TEST 4: HATALI FORM YARATMA (GradeTooLow) ---" << std::endl;
+    try {
+        // Form calistirmak icin 200 rütbe (gecersiz) istiyor!
+        Form hataliForm2("Bozuk Form 2", 50, 200); 
+    } catch (std::exception &e) {
+        std::cerr << "Hata yakalandi: " << e.what() << std::endl;
+    }
+
+    std::cout << "\nTestler tamamlandi!" << std::endl;
     return 0;
 }

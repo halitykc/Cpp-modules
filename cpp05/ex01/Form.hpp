@@ -21,15 +21,15 @@ private:
 public:
     Form(void); //ok
     Form(const std::string& name, const int minGradeS, const int minGradeToE); //ok
-    Form(const Form& copy);
-    Form& operator=(const Form& other);
-    ~Form();
+    Form(const Form& copy); //ok
+    Form& operator=(const Form& other); //ok
+    ~Form(); //ok
 
-    void    beSigned(Bureaucrat& Buro);
-    std::string getName() const;
-    int getMinGrade() const;
-    int getMinExec() const;
-    bool isSigned() const;
+    void    beSigned(Bureaucrat& Buro); //ok
+    std::string getName() const; //ok
+    int getMinGrade() const; //ok
+    int getMinExec() const; //ok
+    bool isSigned() const; //ok
 
 
 
