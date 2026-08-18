@@ -7,7 +7,7 @@
 #include <string>
 #include <exception>
 
-class Form;
+class AForm;
 
 class Bureaucrat {
 
@@ -30,6 +30,8 @@ class Bureaucrat {
         void    increGrade();
         void    decreGrade();
 
+        void    executeForm(AForm const & form);
+
 
         class GradeTooHigh : public std::exception {
 
@@ -43,7 +45,7 @@ class Bureaucrat {
         };
     
         
-        void    signForm( Form& form);
+        void    signForm( AForm& form);
 };
 
 std::ostream& operator<<(std::ostream &o, const Bureaucrat& buro);

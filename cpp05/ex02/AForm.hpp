@@ -23,7 +23,9 @@ public:
     AForm(const std::string& name, const int minGradeS, const int minGradeToE); //ok
     AForm(const AForm& copy); //ok
     AForm& operator=(const AForm& other); //ok
-    ~AForm(); //ok
+    virtual ~AForm(); //ok
+
+    virtual void execute(Bureaucrat const &exec) const = 0;
 
     void    beSigned(Bureaucrat& Buro); //ok
     std::string getName() const; //ok
@@ -39,6 +41,11 @@ public:
             virtual const char* what() const throw();
     };
     class GradeTooLowException: public std::exception {
+
+        public:
+            virtual const char* what() const throw();
+    };
+    class NoSignedFormException: public std::exception {
 
         public:
             virtual const char* what() const throw();

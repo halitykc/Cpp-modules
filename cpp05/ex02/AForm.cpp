@@ -13,6 +13,11 @@ const char* AForm::GradeTooLowException::what() const throw() {
     return "Grade too Low";
 }
 
+const char *AForm::NoSignedFormException::what() const throw() {
+
+    return "Form is not signed";
+}
+
 AForm::AForm(void): _formName(""), _signed(false), _minGradeToSign(5), _minGradeToExec(10) {
 
 }
