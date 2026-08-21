@@ -48,15 +48,34 @@ void    ShrubberyCreationForm::execute(Bureaucrat const &exec) const
         return;
     }
 
-    file << "" << std::endl;
-    file << "" << std::endl;
-    file << "" << std::endl;
-    file << "" << std::endl;
-    file << "" << std::endl;
-    file << "" << std::endl;
-    file << "" << std::endl;
-    file << "" << std::endl;
-    file << "" << std::endl;
+    file << "                                              ." << std::endl;
+    file << "                                   .         ;" << std::endl;
+    file << "      .              .              ;%     ;;" << std::endl;
+    file << "        ,           ,                :;%  %;" << std::endl;
+    file << "         :         ;                   :;%;'     .," << std::endl;
+    file << ",.        %;     %;            ;        %;'    ,;" << std::endl;
+    file << "  ;       ;%;  %%;        ,     %;    ;%;    ,%'" << std::endl;
+    file << "   %;       %;%;      ,  ;       %;  ;%;   ,%;'" << std::endl;
+    file << "    ;%;      %;        ;%;        % ;%;  ,%;'" << std::endl;
+    file << "     `%;.     ;%;     %;'         `;%%;.%;'" << std::endl;
+    file << "      `:;%.    ;%%. %@;        %; ;@%;%'" << std::endl;
+    file << "         `:%;.  :;bd%;          %;@%;'" << std::endl;
+    file << "           `@%:.  :;%.         ;@@%;'" << std::endl;
+    file << "             `@%.  `;@%.      ;@@%;" << std::endl;
+    file << "               `@%%. `@%%    ;@@%;" << std::endl;
+    file << "                 ;@%. :@%%  %@@%;" << std::endl;
+    file << "                   %@bd%%%bd%%:;" << std::endl;
+    file << "                     #@%%%%%:;;" << std::endl;
+    file << "                     %@@%%%::;" << std::endl;
+    file << "                     %@@@%(o);  . '" << std::endl;
+    file << "                     %@@@o%;:(.,'" << std::endl;
+    file << "                 `.. %@@@o%::;" << std::endl;
+    file << "                    `)@@@o%::;" << std::endl;
+    file << "                     %@@(o)::;" << std::endl;
+    file << "                    .%@@@@%::;" << std::endl;
+    file << "                    ;%@@@@%::;." << std::endl;
+    file << "                   ;%@@@@%%:;;;." << std::endl;
+    file << "               ...;%@@@@@%%:;;;;,.." << std::endl;
 
     file.close();
 }
