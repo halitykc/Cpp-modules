@@ -16,9 +16,7 @@ int main()
     {
         try 
         {
-            // Patron formu imzalar
             patron.signForm(*rrf);
-            // Patron formu çalıştırır
             patron.executeForm(*rrf);
         }
         catch (std::exception &e) 
