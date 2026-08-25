@@ -59,5 +59,5 @@ AForm* Intern::makeForm(const std::string &formName, const std::string &target) 
         }
     }
     std::cout << "Intern cannot create " << formName << " cus doesnt exist." << std::endl;
-    return nullptr;
+    return NULL;
 }
