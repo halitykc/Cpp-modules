@@ -2,68 +2,67 @@
 #include "Bureaucrat.hpp"
 
 int main() {
-    std::cout << "--- TEST 1: Sorunsuz Calisan Burokrat (Happy Path) ---" << std::endl;
+    std::cout << "--- (Happy Path) ---" << std::endl;
     try {
         Bureaucrat ahmet("Ahmet", 42);
-        std::cout << ahmet << std::endl; // Operator<< testimiz
-
-        std::cout << "Ahmet terfi aliyor..." << std::endl;
-        ahmet.increGrade(); // 42 -> 41 olmali
         std::cout << ahmet << std::endl;
 
-        std::cout << "Ahmet ceza aliyor..." << std::endl;
-        ahmet.decreGrade(); // 41 -> 42 olmali
+        std::cout << "Ahmet Grade Up..." << std::endl;
+        ahmet.increGrade();
+        std::cout << ahmet << std::endl;
+
+        std::cout << "Ahmet Grade  Down..." << std::endl;
+        ahmet.decreGrade(); 
         std::cout << ahmet << std::endl;
     }
     catch (std::exception &e) {
-        std::cerr << "Hata: " << e.what() << std::endl;
+        std::cerr << "Exeption : " << e.what() << std::endl;
     }
     std::cout << "\n";
 
 
-    std::cout << "--- TEST 2: Yaratilis (Constructor) Sirasinda Hata ---" << std::endl;
+    std::cout << " (Constructor) ---" << std::endl;
     try {
-        std::cout << "Derecesi 0 olan bir Patron yaratilmaya calisiliyor..." << std::endl;
-        Bureaucrat patron("Patron", 0); // Burada bomba patlamali!
+        std::cout << "Trying Grade 0 Patron..." << std::endl;
+        Bureaucrat patron("Patron", 0);
         
-        // Eger ustteki satir patlarsa, alt satir ASLA okunmaz.
+        
         std::cout << patron << std::endl; 
     }
     catch (std::exception &e) {
-        // Bomba buraya duser ve program cokmekten kurtulur.
-        std::cerr << "Yakalandi! -> " << e.what() << std::endl;
+        std::cerr << "Exeption : " << e.what() << std::endl;
     }
     std::cout << "\n";
 
 
-    std::cout << "--- TEST 3: Terfi Sınırını (increGrade) Asma Hatasi ---" << std::endl;
+    std::cout << "--- Grade Borderline ---" << std::endl;
     try {
-        std::cout << "Derecesi 1 olan bir Kral yaratiliyor..." << std::endl;
-        Bureaucrat kral("Kral", 1);
-        std::cout << kral << std::endl;
+        std::cout << "Trying Grade 1 King..." << std::endl;
+        Bureaucrat king("King", 1);
+        std::cout << king << std::endl;
 
-        std::cout << "Kral terfi ettirilmeye calisiliyor..." << std::endl;
-        kral.increGrade(); // Zaten 1, burada bomba patlamali!
+        std::cout << "Trying to increase King's grade..." << std::endl;
+        king.increGrade();
         
-        std::cout << "Bu yazi asla ekranda gorunmeyecek." << std::endl;
+        std::cout << "You wont see this message" << std::endl;
     }
     catch (std::exception &e) {
-        std::cerr << "Yakalandi! -> " << e.what() << std::endl;
+        std::cerr << "Exeption : " << e.what() << std::endl;
     }
     std::cout << "\n";
 
 
-    std::cout << "--- TEST 4: Dusurulme Sınırını (decreGrade) Asma Hatasi ---" << std::endl;
+    std::cout << "--- Grade Borderline ---" << std::endl;
     try {
-        std::cout << "Derecesi 150 olan bir Stajyer yaratiliyor..." << std::endl;
-        Bureaucrat stajyer("Stajyer", 150);
-        std::cout << stajyer << std::endl;
+        std::cout << "Trying Grade 150 Intern..." << std::endl;
+        Bureaucrat intern("Intern", 150);
+        std::cout << intern << std::endl;
 
-        std::cout << "Stajyerin rütbesi dusurulmeye calisiliyor..." << std::endl;
-        stajyer.decreGrade(); // Zaten 150, burada bomba patlamali!
+        std::cout << "Intern's grade is being decreased..." << std::endl;
+        intern.decreGrade();
     }
     catch (std::exception &e) {
-        std::cerr << "Yakalandi! -> " << e.what() << std::endl;
+        std::cerr << "Exeption : " << e.what() << std::endl;
     }
     std::cout << "\n";
 
