@@ -29,7 +29,7 @@ static bool isChar(const std::string &text) {
 }
 
 
-void ScalarConverter::convert(std::string &text) {
+void ScalarConverter::convert(const std::string &text) {
 
     if (isSpecialLiteral(text))
         return;

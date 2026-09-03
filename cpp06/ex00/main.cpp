@@ -4,16 +4,16 @@
 #include <iostream>
 
 
-int main() {
+int main(int argc, char **argv) {
 
-    ScalarConverter::convert("nan");
-    ScalarConverter::convert("nanf");
-    ScalarConverter::convert("+inf");
-    ScalarConverter::convert("-inf");
-    ScalarConverter::convert("+inff");
-    ScalarConverter::convert("-inff");
+    if (argc != 2)
+    {
+        std::cout << "Usage: ./convert <literal>" << std::endl;
+        return 1;
+    }
+    //ScalarConverter::convert(text);
 
-
+    ScalarConverter::convert(std::string(argv[1]));
 
     
     return 0;
