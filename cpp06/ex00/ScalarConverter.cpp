@@ -39,8 +39,8 @@ void ScalarConverter::convert(const std::string &text) {
     {
         std::cout << "char: '" << text[0] << "'" << std::endl;
         std::cout << "int: " << static_cast<int>(text[0]) << std::endl;
-        std::cout << "float: " << static_cast<float>(text[0]) << "f" << std::endl;
-        std::cout << "double: " << static_cast<double>(text[0]) << std::endl;
+        std::cout << "float: " << static_cast<float>(text[0]) << ".0f" << std::endl;
+        std::cout << "double: " << static_cast<double>(text[0]) << ".0" << std::endl;
     }
     
     // int
