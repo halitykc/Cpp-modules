@@ -1,5 +1,20 @@
 #include "ScalarConverter.hpp"
 
+ScalarConverter::ScalarConverter() {}
+
+ScalarConverter::ScalarConverter(const ScalarConverter &other) {
+    (void)other;
+}
+
+ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other) {
+    (void)other;
+    return *this;
+}
+
+ScalarConverter::~ScalarConverter() {}
+
+
+
 static bool isSpecialLiteral(const std::string &text) {
     std::string ex_literals[3] = {"nan", "+inf", "-inf"};
     std::string ex_scien_literals[3] = {"nanf", "+inff", "-inff"};
@@ -59,7 +74,6 @@ static bool isDouble(const std::string &text) {
     std::strtod(text.c_str(), &end);
     return (*end == '\0' && end != text.c_str());
 }
-
 
 void ScalarConverter::convert(const std::string &text) {
 
