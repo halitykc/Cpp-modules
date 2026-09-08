@@ -4,7 +4,6 @@
 #define TEMPLATE_HPP
 
 
-
 template <typename T>
 void swap(T &a, T &b)
 {
@@ -16,13 +15,23 @@ void swap(T &a, T &b)
 template <typename T>
 T min(const T &a, const T &b)
 {   
-    return (a < b ? a : b);
+    if (a < b)
+        return a;
+    else if (a == b)
+        return b;
+    else
+        return b;
 }
 
 template <typename T>
 T max(const T &a, const T &b)
 {
-    return (a > b ? a : b);
+    if (a > b)
+        return a;
+    else if (a == b)
+        return b;
+    else
+        return b;
 }
 
 #endif
