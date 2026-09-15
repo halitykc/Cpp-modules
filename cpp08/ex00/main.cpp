@@ -1,24 +1,47 @@
 #include <iostream>
 #include <vector>
+#include <list>
+#include "easyfind.hpp"
 
 int main() {
-    // C++98 uyumlu eleman ekleme
-    std::vector<int> numbers;
-    numbers.push_back(1);
-    numbers.push_back(2);
-    numbers.push_back(3);
 
-    std::vector<int>::iterator it;
-    it = numbers.begin();
+    std::cout << "========== Vector ==========" << std::endl;
+    std::vector<int> myVector;
+    
+    myVector.push_back(10);
+    myVector.push_back(20);
+    myVector.push_back(30);
+    myVector.push_back(42);
 
-    // İteratörün gösterdiği DEĞER (Çıktı: 1)
-    std::cout << "Ilk elemanin degeri: " << *it << std::endl;
+    try {
+        std::vector<int>::iterator it = easyfind(myVector, 42);
+        std::cout << "-> FOUND: " << *it << "\n" << std::endl;
 
-    // Vektörün içindeki ilk elemanın HAFIZA ADRESİ
-    std::cout << "Ilk elemanin adresi: " << &*it << std::endl;
+        it = easyfind(myVector, 99);
+        std::cout << "-> FOUND: " << *it << std::endl;
+    }
+    catch (const std::exception& e) { 
+        std::cerr << e.what() << std::endl;
+    }
 
-    // Sağlaması: Direkt 0. indeksin adresine bakıyoruz, üsttekiyle AYNI olmalı.
-    std::cout << "numbers[0] adresi:   " << &numbers[0] << std::endl;
+    std::cout << "========== LIST ==========" << std::endl;
+    std::list<int> myList;
+    
+    myList.push_back(100);
+    myList.push_back(200);
+    myList.push_back(300);
+
+    try {
+        std::list<int>::iterator it2 = easyfind(myList, 200);
+        std::cout << "-> FOUND: " << *it2 << "\n" << std::endl;
+
+        it2 = easyfind(myList, 5);
+        std::cout << "-> FOUND: " << *it2 << std::endl;
+    }
+    catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
 
     return 0;
 }
+
