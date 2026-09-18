@@ -23,6 +23,15 @@ class Span
 
         void addNumber(int n);
 
+        template <typename IT>
+        void addNumber(IT begin, IT end)
+        {
+            unsigned int dist = std::distance(begin, end);
+            if (_vector.size() + dist > _size)
+                throw SpanFullException();
+            _vector.insert(_vector.end(), begin, end);
+        }
+
         unsigned int shortestSpan() const;
         unsigned int longestSpan() const;
 
@@ -39,15 +48,6 @@ class Span
         };
 
 
-
-    template <typename IT>
-    void addNumber(IT begin, IT end)
-    {
-        unsigned int distance = std::distance(begin, end);
-        if (_vector.size() + distance > _size)
-            throw SpanFullException();
-        _vector.insert(_vector.end(), begin, end);
-    }
 };
 
 #endif
