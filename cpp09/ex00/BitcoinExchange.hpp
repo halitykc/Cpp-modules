@@ -25,7 +25,7 @@ class BitcoinExchange
         BitcoinExchange &operator=(const BitcoinExchange &other);
         ~BitcoinExchange();
 
-        void run(const std::string& inputFile);
+        void execute(const std::string& inputFile);
 
 };
 

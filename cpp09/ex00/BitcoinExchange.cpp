@@ -170,3 +170,24 @@ void BitcoinExchange::processLine(const std::string& line) const
     std::cout << date << " => " << coin_value << " = " << (coin_value * it->second) << std::endl;
 
 }
+
+void BitcoinExchange::execute(const std::string& inputFile) {
+
+    std::ifstream file(inputFile.c_str());
+    std::string line;
+
+    if (!file.is_open()) {
+        throw std::runtime_error("Error: could not open file.");
+    
+    loadDatabase("data.csv");
+
+    if (!std::getline(file, line) || rm_spaces(line) != "date | value") {
+        throw std::runtime_error("Error: Invalid header in input file.");
+    }
+
+    while (std::getline(file, line)) {
+        if (!line.empty())
+            processLine(line);
+    }
+
+}
