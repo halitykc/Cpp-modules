@@ -57,6 +57,11 @@ bool BitcoinExchange::date_control(const std::string& date) const
     return day <= daysInMonth[month - 1];
 }
 
+bool BitcoinExchange::leap_year(int year) const
+{
+    return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+}
+
 bool    BitcoinExchange::value_control(const std::string &value, double &result) const
 {
     const char *num = value.c_str();
@@ -130,7 +135,7 @@ void BitcoinExchange::processLine(const std::string& line) const
     std::string::size_type pipe_pos = line.find('|');
     if (pipe_pos == std::string::npos)
     {
-        std::cerr << "Error: Invalid line format: " << line << std::endl;
+        std::cerr << "Error: bad input => " << line << std::endl;
         return;
     }
 
@@ -140,7 +145,7 @@ void BitcoinExchange::processLine(const std::string& line) const
 
     if (!date_control(date))
     {
-        std::cerr << "Error: Invalid date format: " << date << std::endl;
+        std::cerr << "Error: bad input =>" << date << std::endl;
         return;
     }
     if (!value_control(value_str, coin_value))
@@ -150,18 +155,18 @@ void BitcoinExchange::processLine(const std::string& line) const
         while (*endptr == ' ' || *endptr == '\t')
             ++endptr;
         if (endptr != value_str.c_str() && value > 1000.0)
-            std::cerr << "Error: Value exceeds maximum limit of 1000" << std::endl;
+            std::cerr << "Error: too large a number." << std::endl;
         else if (value < 0.0)
-            std::cerr << "Error: Negative value not allowed." << std::endl;
+            std::cerr << "Error: not a positive number." << std::endl;
         else
-            std::cerr << "Error: Invalid value format: " << date << std::endl;
+            std::cerr << "Error: bad input => " << date << std::endl;
         return;
     }
 
     std::map<std::string, double>::const_iterator it = _database.lower_bound(date);
-    if (it == _database.end() || it->first != date && it == _database.begin())
+    if (it == _database.end() || (it->first != date && it == _database.begin()))
     {
-        std::cerr << "Error: No data available for date: " << date << std::endl;
+        std::cerr << "Error: bad input => " << date << std::endl;
         return;
     }
 
@@ -176,7 +181,7 @@ void BitcoinExchange::execute(const std::string& inputFile) {
     std::ifstream file(inputFile.c_str());
     std::string line;
 
-    if (!file.is_open()) {
+    if (!file.is_open())
         throw std::runtime_error("Error: could not open file.");
     
     loadDatabase("data.csv");
@@ -189,5 +194,5 @@ void BitcoinExchange::execute(const std::string& inputFile) {
         if (!line.empty())
             processLine(line);
     }
-
 }
+
