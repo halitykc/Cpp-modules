@@ -124,3 +124,49 @@ std::string BitcoinExchange::rm_spaces(const std::string& text) const
         --end;
     return text.substr(start, end - start);
 }
+
+void BitcoinExchange::processLine(const std::string& line) const
+{
+    std::string::size_type pipe_pos = line.find('|');
+    if (pipe_pos == std::string::npos)
+    {
+        std::cerr << "Error: Invalid line format: " << line << std::endl;
+        return;
+    }
+
+    std::string date = rm_spaces(line.substr(0, pipe_pos));
+    std::string value_str = rm_spaces(line.substr(pipe_pos + 1));
+    double coin_value = 0.0;
+
+    if (!date_control(date))
+    {
+        std::cerr << "Error: Invalid date format: " << date << std::endl;
+        return;
+    }
+    if (!value_control(value_str, coin_value))
+    {
+        char *endptr = NULL;
+        double value = std::strtod(value_str.c_str(), &endptr);
+        while (*endptr == ' ' || *endptr == '\t')
+            ++endptr;
+        if (endptr != value_str.c_str() && value > 1000.0)
+            std::cerr << "Error: Value exceeds maximum limit of 1000" << std::endl;
+        else if (value < 0.0)
+            std::cerr << "Error: Negative value not allowed." << std::endl;
+        else
+            std::cerr << "Error: Invalid value format: " << date << std::endl;
+        return;
+    }
+
+    std::map<std::string, double>::const_iterator it = _database.lower_bound(date);
+    if (it == _database.end() || it->first != date && it == _database.begin())
+    {
+        std::cerr << "Error: No data available for date: " << date << std::endl;
+        return;
+    }
+
+    if (it->first != date)
+        --it;
+    std::cout << date << " => " << coin_value << " = " << (coin_value * it->second) << std::endl;
+
+}
