@@ -4,6 +4,8 @@
 #ifndef RPN_HPP
 #define RPN_HPP
 
+#include <iostream>
+#include <stdexcept>
 #include <string>
 #include <stack>
 #include <sstream>
@@ -19,7 +21,7 @@ class RPN
     bool isOp(char c) const;
     long long doOp(long long l, long long r, char op);
 
-    long long calculate(std::string &expr);
+    long long calculate( const std::string &expr);
 
 };
 #endif
