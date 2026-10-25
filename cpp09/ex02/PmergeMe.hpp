@@ -13,7 +13,7 @@ struct PmergeItem {
     unsigned  int id;
 
     PmergeItem();
-    PmergeItem(unsigned int value, unsigned int id);
+    PmergeItem(unsigned int value, unsigned int i);
     PmergeItem(const PmergeItem& other);
     PmergeItem& operator=(const PmergeItem& other);
     ~PmergeItem();
@@ -25,7 +25,7 @@ struct PmergePair {
     PmergeItem large;
 
     PmergePair();
-    PmergePair(unsigned int value, unsigned int id);
+    PmergePair(unsigned int s, unsigned int l);
     PmergePair(const PmergePair& other);
     PmergePair& operator=(const PmergePair& other);
     ~PmergePair();
