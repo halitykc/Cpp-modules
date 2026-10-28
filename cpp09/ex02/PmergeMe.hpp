@@ -25,7 +25,7 @@ struct PmergePair {
     PmergeItem large;
 
     PmergePair();
-    PmergePair(unsigned int s, unsigned int l);
+    PmergePair(const PmergeItem& s, const PmergeItem& l);
     PmergePair(const PmergePair& other);
     PmergePair& operator=(const PmergePair& other);
     ~PmergePair();
