@@ -89,7 +89,7 @@ static double elapsedMicroseconds(const struct timespec& start, const struct tim
 bool PmergeMe::parseNum(const std::string& text, unsigned int& value)
 {
     char* end = 0;
-    unsigned long parsed;
+    unsigned long num;
     std::string::size_type i = 0;
 
     if (text.empty())
@@ -102,13 +102,13 @@ bool PmergeMe::parseNum(const std::string& text, unsigned int& value)
     }
 
     errno = 0;
-    parsed = std::strtoul(text.c_str(), &end, 10);
+    num = std::strtoul(text.c_str(), &end, 10);
     if (errno == ERANGE || end == text.c_str() || *end != '\0')
         return false;
-    if (parsed == 0 || parsed > static_cast<unsigned long>(UINT_MAX))
+    if (num == 0 || num > static_cast<unsigned long>(UINT_MAX))
         return false;
 
-    value = static_cast<unsigned int>(parsed);
+    value = static_cast<unsigned int>(num);
     return true;
 }
 
