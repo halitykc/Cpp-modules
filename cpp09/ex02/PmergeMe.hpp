@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PmergeMe.hpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyakici <hyakici@student.42istanbul.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/11/14 08:42:22 by hyakici           #+#    #+#             */
+/*   Updated: 2026/11/14 08:46:19 by hyakici          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
+#include <iostream>
 #include <cstddef>
 #include <deque>
 #include <string>
@@ -50,7 +63,7 @@ class PmergeMe
         PmergeMe& operator=(const PmergeMe& other);
         ~PmergeMe();
 
-        void parseArguments(int argc, char** argv);
+        void parseArgs(int argc, char** argv);
         void run() const;
 };
 

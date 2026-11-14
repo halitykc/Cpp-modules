@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   RPN.hpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyakici <hyakici@student.42istanbul.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/31 12:23:57 by hyakici           #+#    #+#             */
+/*   Updated: 2026/11/14 09:04:34 by hyakici          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 
 
@@ -9,6 +21,7 @@
 #include <string>
 #include <stack>
 #include <sstream>
+#include <climits>
 
 class RPN
 {
@@ -19,9 +32,9 @@ class RPN
         ~RPN();
 
     bool isOp(char c) const;
-    long long doOp(long long l, long long r, char op);
+    long doOp(long l, long r, char op);
 
-    long long calculate( const std::string &expr);
+    long calculate( const std::string &expr);
 
 };
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PmergeMe.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyakici <hyakici@student.42istanbul.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/11/14 08:42:33 by hyakici           #+#    #+#             */
+/*   Updated: 2026/11/14 08:53:49 by hyakici          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "PmergeMe.hpp"
 
 #include <cerrno>
@@ -150,12 +162,12 @@ std::vector<PmergeItem> PmergeMe::fordJohnsonVector(const std::vector<PmergeItem
         return items;
 
     std::vector<PmergePair> pairs;
-    std::vector<PmergePair> ordered;
-    std::vector<PmergeItem> largerItems;
-    std::vector<PmergeItem> mainChain;
+    std::vector<PmergePair> orderedPairs;
+    std::vector<PmergeItem> largenums;
+    std::vector<PmergeItem> final_lst;
     std::vector<std::size_t> slot;
-    std::size_t maxId = 0;
-    std::size_t pendingCount;
+    std::size_t max_id = 0;
+    std::size_t pendings;
     std::size_t previous = 1;
     std::size_t current = 3;
     std::size_t i;
@@ -166,56 +178,54 @@ std::vector<PmergeItem> PmergeMe::fordJohnsonVector(const std::vector<PmergeItem
             pairs.push_back(PmergePair(items[i], items[i + 1]));
         else
             pairs.push_back(PmergePair(items[i + 1], items[i]));
-        largerItems.push_back(pairs.back().large);
-        if (pairs.back().large.id > maxId)
-            maxId = pairs.back().large.id;
+        largenums.push_back(pairs.back().large);
+        if (pairs.back().large.id > max_id)
+            max_id = pairs.back().large.id;
     }
 
-    mainChain = fordJohnsonVector(largerItems);
+    final_lst = fordJohnsonVector(largenums);
 
-    slot.assign(maxId + 1, 0);
+    slot.assign(max_id + 1, 0);
     for (i = 0; i < pairs.size(); ++i)
         slot[pairs[i].large.id] = i;
 
-    for (i = 0; i < mainChain.size(); ++i)
-        ordered.push_back(pairs[slot[mainChain[i].id]]);
+    for (i = 0; i < final_lst.size(); ++i)
+        orderedPairs.push_back(pairs[slot[final_lst[i].id]]);
 
-    mainChain.insert(mainChain.begin(), ordered[0].small);
+    final_lst.insert(final_lst.begin(), orderedPairs[0].small);
 
-    pendingCount = ordered.size() + (items.size() % 2);
+    pendings = orderedPairs.size() + (items.size() % 2);
 
-    while (previous < pendingCount)
+    while (previous < pendings)
     {
-        std::size_t high = current < pendingCount ? current : pendingCount;
+        std::size_t maxrange = current < pendings ? current : pendings;
         std::size_t index;
 
-        for (index = high; index > previous; --index)
+        for (index = maxrange; index > previous; --index)
         {
             std::size_t k = index - 1;
             PmergeItem item;
             std::size_t bound;
 
-            if (k < ordered.size())
+            if (k < orderedPairs.size())
             {
-                item = ordered[k].small;
+                item = orderedPairs[k].small;
                 bound = k + 1;
-                while (mainChain[bound].id != ordered[k].large.id)
+                while (final_lst[bound].id != orderedPairs[k].large.id)
                     ++bound;
             }
             else
             {
                 item = items.back();
-                bound = mainChain.size();
+                bound = final_lst.size();
             }
-            mainChain.insert(mainChain.begin() + binaryPosition(mainChain, item, bound), item);
+            final_lst.insert(final_lst.begin() + binaryPosition(final_lst, item, bound), item);
         }
-        {
-            std::size_t next = current + 2 * previous;
-            previous = current;
-            current = next;
-        }
+        std::size_t next = current + 2 * previous;
+        previous = current;
+        current = next;
     }
-    return mainChain;
+    return final_lst;
 }
 
 std::deque<PmergeItem> PmergeMe::fordJohnsonDeque(const std::deque<PmergeItem>& items)
@@ -224,12 +234,12 @@ std::deque<PmergeItem> PmergeMe::fordJohnsonDeque(const std::deque<PmergeItem>& 
         return items;
 
     std::deque<PmergePair> pairs;
-    std::deque<PmergePair> ordered;
-    std::deque<PmergeItem> largerItems;
-    std::deque<PmergeItem> mainChain;
+    std::deque<PmergePair> orderedPairs;
+    std::deque<PmergeItem> largenums;
+    std::deque<PmergeItem> final_lst;
     std::deque<std::size_t> slot;
-    std::size_t maxId = 0;
-    std::size_t pendingCount;
+    std::size_t max_id = 0;
+    std::size_t pendings;
     std::size_t previous = 1;
     std::size_t current = 3;
     std::size_t i;
@@ -240,56 +250,54 @@ std::deque<PmergeItem> PmergeMe::fordJohnsonDeque(const std::deque<PmergeItem>& 
             pairs.push_back(PmergePair(items[i], items[i + 1]));
         else
             pairs.push_back(PmergePair(items[i + 1], items[i]));
-        largerItems.push_back(pairs.back().large);
-        if (pairs.back().large.id > maxId)
-            maxId = pairs.back().large.id;
+        largenums.push_back(pairs.back().large);
+        if (pairs.back().large.id > max_id)
+            max_id = pairs.back().large.id;
     }
 
-    mainChain = fordJohnsonDeque(largerItems);
+    final_lst = fordJohnsonDeque(largenums);
 
-    slot.assign(maxId + 1, 0);
+    slot.assign(max_id + 1, 0);
     for (i = 0; i < pairs.size(); ++i)
         slot[pairs[i].large.id] = i;
 
-    for (i = 0; i < mainChain.size(); ++i)
-        ordered.push_back(pairs[slot[mainChain[i].id]]);
+    for (i = 0; i < final_lst.size(); ++i)
+        orderedPairs.push_back(pairs[slot[final_lst[i].id]]);
 
-    mainChain.insert(mainChain.begin(), ordered[0].small);
+    final_lst.insert(final_lst.begin(), orderedPairs[0].small);
 
-    pendingCount = ordered.size() + (items.size() % 2);
+    pendings = orderedPairs.size() + (items.size() % 2);
 
-    while (previous < pendingCount)
+    while (previous < pendings)
     {
-        std::size_t high = current < pendingCount ? current : pendingCount;
+        std::size_t maxrange = current < pendings ? current : pendings;
         std::size_t index;
 
-        for (index = high; index > previous; --index)
+        for (index = maxrange; index > previous; --index)
         {
             std::size_t k = index - 1;
             PmergeItem item;
             std::size_t bound;
 
-            if (k < ordered.size())
+            if (k < orderedPairs.size())
             {
-                item = ordered[k].small;
+                item = orderedPairs[k].small;
                 bound = k + 1;
-                while (mainChain[bound].id != ordered[k].large.id)
+                while (final_lst[bound].id != orderedPairs[k].large.id)
                     ++bound;
             }
             else
             {
                 item = items.back();
-                bound = mainChain.size();
+                bound = final_lst.size();
             }
-            mainChain.insert(mainChain.begin() + binaryPosition(mainChain, item, bound), item);
+            final_lst.insert(final_lst.begin() + binaryPosition(final_lst, item, bound), item);
         }
-        {
-            std::size_t next = current + 2 * previous;
-            previous = current;
-            current = next;
-        }
+        std::size_t next = current + 2 * previous;
+        previous = current;
+        current = next;
     }
-    return mainChain;
+    return final_lst;
 }
 
 void PmergeMe::displayVector(const std::vector<PmergeItem>& values)
@@ -304,7 +312,7 @@ void PmergeMe::displayVector(const std::vector<PmergeItem>& values)
     std::cout << std::endl;
 }
 
-void PmergeMe::parseArguments(int argc, char** argv)
+void PmergeMe::parseArgs(int argc, char** argv)
 {
     int i;
 

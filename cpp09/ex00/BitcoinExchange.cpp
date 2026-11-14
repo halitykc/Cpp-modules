@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyakici <hyakici@student.42istanbul.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/31 12:24:01 by hyakici           #+#    #+#             */
+/*   Updated: 2026/11/14 09:47:00 by hyakici          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "BitcoinExchange.hpp"
 
@@ -89,13 +101,16 @@ void BitcoinExchange::loadDatabase(const std::string& filename) {
     std::ifstream file(filename.c_str());
     std::string line;
 
-    if (!file.is_open()) {
+    if (!file.is_open())
+	{
         std::cerr << "Error: Could not open database file: " << filename << std::endl;
         return;
     }
     int line_num = 0;
-    while (std::getline(file, line)) {
-        if (line_num == 0) {
+    while (std::getline(file, line))
+	{
+        if (line_num == 0)
+		{
             line_num++;
             continue;
         }
@@ -186,11 +201,11 @@ void BitcoinExchange::execute(const std::string& inputFile) {
     
     loadDatabase("data.csv");
 
-    if (!std::getline(file, line) || rm_spaces(line) != "date | value") {
+    if (!std::getline(file, line) || rm_spaces(line) != "date | value")
         throw std::runtime_error("Error: Invalid header in input file.");
-    }
 
-    while (std::getline(file, line)) {
+    while (std::getline(file, line))
+	{
         if (!line.empty())
             processLine(line);
     }
