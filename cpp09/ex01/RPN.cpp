@@ -78,7 +78,7 @@ long RPN::doOp(long l, long r, char op)
 
 long RPN::calculate(const std::string &expr)
 {
-    std::stack<long> stack;
+    std::stack<long, std::list<long> > stack;
     std::istringstream input(expr);
     std::string arg;
 

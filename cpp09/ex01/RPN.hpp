@@ -22,6 +22,7 @@
 #include <stack>
 #include <sstream>
 #include <climits>
+#include <list>
 
 class RPN
 {
