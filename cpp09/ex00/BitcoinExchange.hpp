@@ -26,11 +26,10 @@ class BitcoinExchange
 
         bool date_control(const std::string& date) const;
         bool leap_year(int year) const;
-        bool value_control(const std::string &value, double &result) const;
         std::string rm_spaces(const std::string &str) const;
         void loadDatabase(const std::string& filename);
         void processLine(const std::string& line) const;
-
+        bool parse_number(const std::string& s, double& out) const;
      public:
         BitcoinExchange();
         BitcoinExchange(const BitcoinExchange &other);
