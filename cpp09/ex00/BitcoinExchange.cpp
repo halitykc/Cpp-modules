@@ -92,12 +92,12 @@ void BitcoinExchange::loadDatabase(const std::string& filename)
     if (!file.is_open())
         throw std::runtime_error("Error: Could not open database file: " + filename);
 
-    bool first_line = true;
+    bool header = true;
     while (std::getline(file, line))
     {
-        if (first_line)
+        if (header)
         {
-            first_line = false;
+            header = false;
             continue;
         }
         std::string::size_type comma_pos = line.find(',');
@@ -105,13 +105,12 @@ void BitcoinExchange::loadDatabase(const std::string& filename)
             continue;
 
         std::string date = rm_spaces(line.substr(0, comma_pos));
-        std::string value_str = rm_spaces(line.substr(comma_pos + 1));
-        double price = 0.0;
+        std::string value = rm_spaces(line.substr(comma_pos + 1));
 
+        double price = 0.0;
         if (!date_control(date))
             continue;
-        // Fiyatlar için 1000 sınırı YOK; sadece geçerli ve negatif olmayan sayı.
-        if (!parse_number(value_str, price) || price < 0.0)
+        if (!parse_number(value, price) || price < 0.0)
             continue;
         _database[date] = price;
     }
@@ -141,40 +140,38 @@ void BitcoinExchange::processLine(const std::string& line) const
     }
 
     std::string date = rm_spaces(line.substr(0, pipe_pos));
-    std::string value_str = rm_spaces(line.substr(pipe_pos + 1));
-    double coin_value = 0.0;
+    std::string value = rm_spaces(line.substr(pipe_pos + 1));
+    double coinVal = 0.0;
 
     if (!date_control(date))
     {
         std::cerr << "Error: bad input => " << date << std::endl;
         return;
     }
-    if (!parse_number(value_str, coin_value))
+    if (!parse_number(value, coinVal))
     {
         std::cerr << "Error: bad input => " << line << std::endl;
         return;
     }
-    if (coin_value < 0.0)
+    if (coinVal < 0.0)
     {
         std::cerr << "Error: not a positive number." << std::endl;
         return;
     }
-    if (coin_value > 1000.0)
+    if (coinVal > 1000.0)
     {
         std::cerr << "Error: too large a number." << std::endl;
         return;
     }
 
-    // date'e eşit veya ondan önceki en yakın tarih.
     std::map<std::string, double>::const_iterator it = _database.upper_bound(date);
     if (it == _database.begin())
     {
-        // date, veritabanındaki ilk tarihten de önce.
         std::cerr << "Error: bad input => " << date << std::endl;
         return;
     }
     --it;
-    std::cout << date << " => " << coin_value << " = " << (coin_value * it->second) << std::endl;
+    std::cout << date << " => " << coinVal << " = " << (coinVal * it->second) << std::endl;
 }
 
 void BitcoinExchange::execute(const std::string& inputFile)
